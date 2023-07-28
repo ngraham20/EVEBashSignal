@@ -4,6 +4,7 @@ use tungstenite::{connect, Message};
 use url::Url;
 use serde::*;
 use serde_json::*;
+use tokio_stream::{self as stream, StreamExt};
 
 fn main() {
     let (mut socket, _response) =
@@ -13,6 +14,8 @@ fn main() {
 
     loop {
         let msg = socket.read_message().expect("Error reading message");
+
+        
 
         // if it's text, it's json. convert it into the objects and print those.
         // if it's a ping, don't do anything, it's blank data.
